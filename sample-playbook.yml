@@ -1,0 +1,11 @@
+---
+- hosts: all
+  tasks:
+  - name: copy the image tar file from ansible master to node
+    copy:
+     src: /home/ec2-user/getting-started.tar
+     dest: /home/ec2-user/
+  - name: load the image in ansible node machine
+    shell: docker load -i /home/ec2-user/getting-started.tar
+  - name: create the container
+    shell: sudo docker run -d --name getting-started -p 3000:3000 6c9f6f13017a
